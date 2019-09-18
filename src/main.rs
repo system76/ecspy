@@ -40,6 +40,12 @@ fn main() {
         d2_read(0x12)
     };
 
+    let i2ec_write = |addr: u16, value: u8| {
+        d2_write(0x11, (addr >> 8) as u8);
+        d2_write(0x10, addr as u8);
+        d2_write(0x12, value);
+    };
+
     println!(
         "id {:>02X}{:>02X} rev {}",
         i2ec_read(0x2000),
