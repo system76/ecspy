@@ -71,4 +71,8 @@ fn main() {
             )
         }
     }
+
+    for sram in 0x0000 .. 0x1000 {
+        println!("0x{:04X} = 0x{:02X}", sram, i2ec_read(sram));
+    }
 }
