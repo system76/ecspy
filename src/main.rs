@@ -72,7 +72,26 @@ fn main() {
         }
     }
 
+    {
+        let bank = b'M';
+        let data = i2ec_read(0x160D);
+        let mirror = i2ec_read(0x166D);
+        for pin in 0..8 {
+            let ctrl = i2ec_read(0x16A0 + pin);
+            println!(
+                "{}{}: data {} mirror {} control {:02X}",
+                bank as char,
+                pin,
+                (data >> pin) & 1,
+                (mirror >> pin) & 1,
+                ctrl,
+            )
+        }
+    }
+
+    /*
     for sram in 0x0000 .. 0x1000 {
         println!("0x{:04X} = 0x{:02X}", sram, i2ec_read(sram));
     }
+    */
 }
