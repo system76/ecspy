@@ -2,9 +2,7 @@ use hwio::{Io, Pio};
 use std::io;
 
 fn main() {
-    if unsafe { libc::iopl(3) } != 0 {
-        panic!("iopl: {}", io::Error::last_os_error());
-    }
+    assert!(unsafe { libc::iopl(3) } == 0, "iopl: {}", io::Error::last_os_error());
 
     let addr_port = || -> Pio<u8> {
         Pio::<u8>::new(0x2E)
@@ -40,6 +38,7 @@ fn main() {
         d2_read(0x12)
     };
 
+    #[allow(unused_variables)]
     let i2ec_write = |addr: u16, value: u8| {
         d2_write(0x11, (addr >> 8) as u8);
         d2_write(0x10, addr as u8);
