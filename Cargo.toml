@@ -8,4 +8,4 @@ edition = "2018"
 
 [dependencies]
 libc = "0.2"
-redox_hwio = "0.1.4"
+redox_hwio = "0.1.5"
